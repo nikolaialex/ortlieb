@@ -59,9 +59,20 @@ class MicroDataObject
 
     #todo if prop not in @propMap
 
-    proArr = propMap[propertyName]
+    propArr = propMap[propertyName]
+    if propArr != nil
+      if propArr[0].attr("itemscope") == nil
+        if propArr[0].attr("content") == nil
+          property = propArr[0].content()
+        else
+          property = propArr[0].attr("content")
+        end
 
-
+      elsif propArr[0].attr("itemscope") != nil
+        property = MicroDataObject.new(propArr[0],@root)
+      end
+    end
+    return property
   end
 
   def method_missing(m, *args, &block)

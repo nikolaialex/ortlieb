@@ -10,12 +10,18 @@ module Projekt1
 
 
 
-  document1 = HypermediaParser.enter("http://localhost:8084/WebApplication3/")
+ # document1 = HypermediaParser.enter("http://localhost:8084/WebApplication3/")
+  document1 = HypermediaParser.enter("http://www.youtube.com/watch?v=YXiEGUJKNrQ")
   allObjects = document1.get_top_level_objects()
 
   puts allObjects[0].get_Propertys()
   puts allObjects[0].name
-  puts allObjects[0].Actor
+  puts allObjects[0].description
+  puts allObjects[0].paid
+  puts allObjects[0].author.get_Propertys()
+  puts allObjects[0].author.url
+  puts allObjects[1].name
+  puts allObjects[1].Actor.name
   puts "finished"
 
 end
