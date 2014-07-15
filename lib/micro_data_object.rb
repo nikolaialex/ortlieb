@@ -61,15 +61,39 @@ class MicroDataObject
 
     propArr = propMap[propertyName]
     if propArr != nil
-      if propArr[0].attr("itemscope") == nil
-        if propArr[0].attr("content") == nil
-          property = propArr[0].content()
-        else
-          property = propArr[0].attr("content")
+      if propArr.size  == 1
+        if propArr[0].attr("itemscope") == nil
+          if propArr[0].attr("content") == nil and propArr[0].attr("href") == nil
+            property = propArr[0].content()
+          elsif propArr[0].attr("href") != nil
+            property = propArr[0].get_attribute("href")
+          else
+            property = propArr[0].attr("content")
+          end
+
+        elsif propArr[0].attr("itemscope") != nil
+          property = MicroDataObject.new(propArr[0],@root)
         end
 
-      elsif propArr[0].attr("itemscope") != nil
-        property = MicroDataObject.new(propArr[0],@root)
+      elsif propArr.size > 1
+        property = []
+        i = 0
+        for item in propArr
+          if propArr[i].attr("itemscope") == nil
+            if propArr[i].attr("content") == nil and propArr[i].attr("href") == nil
+              property.push propArr[i].content()
+
+            elsif propArr[i].attr("href") != nil
+              property.push proparr[i].[]("href")
+            else
+              property.push propArr[0].attr("content")
+            end
+          elsif propArr[i].attr("itemscope") != nil
+            property.push MicroDataObject.new(propArr[i], @root)
+          end
+          i = i +1
+        end
+      else return nil
       end
     end
     return property
