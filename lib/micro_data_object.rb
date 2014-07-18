@@ -1,9 +1,10 @@
 require 'nokogiri/xml/node'
 require 'nokogiri/xml'
+require 'link'
 
 class MicroDataObject
 
-  attr_accessor :property
+  attr_accessor :parent
 
   def initialize(root, parent)
     @root = root
@@ -53,9 +54,8 @@ class MicroDataObject
     return @propMap
   end
 
-  def getProperty(propertyName)
+  def get_Property(propertyName)
     propMap = get_PropMap()
-
 
     #todo if prop not in @propMap
 
@@ -84,7 +84,7 @@ class MicroDataObject
               property.push propArr[i].content()
 
             elsif propArr[i].attr("href") != nil
-              property.push proparr[i].[]("href")
+              property.push propArr[i].[]("href")
             else
               property.push propArr[0].attr("content")
             end
@@ -99,13 +99,50 @@ class MicroDataObject
     return property
   end
 
+  def build_Link_Map_Helper(node)
+    if node.name() == "a" and node.attr("rel") != nil
+      rel = node.attr("rel")
+      if @linkMap[rel] == nil
+        @linkMap[rel] = []
+      end
+      @linkMap[rel].push(Link.new(node, self))
+      if node.attr("itemscope") != nil
+        return
+      end
+    end
+    for child in node.children()
+      build_Link_Map_Helper(child)
+    end
+  end
+
+  def build_Link_Map()
+    @linkMap = Hash.new()
+    for child in @root.children()
+      build_Link_Map_Helper(child)
+    end
+  end
+
+
+  def get_Link_Map()
+    if @linkMap == nil then
+      build_Link_Map()
+    end
+    return @linkMap.values()
+  end
+
+
+  def get_Links()
+    linkMap = get_Link_Map()
+    return linkMap
+  end
+
   def method_missing(m, *args, &block)
     if @propMap == nil
       build_Prop_Map
     end
     m = m.to_s
     if @propMap[m] != nil
-      return getProperty(m)
+      return get_Property(m)
     else
       puts "There's no method called #{m} here -- please try again."
     end

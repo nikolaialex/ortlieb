@@ -23,7 +23,7 @@ class MicroDataDocument
 
   def get_Child_Nodes(node, objectList)
     if node.attr("itemtype") != nil and node.attr("itemprop") == nil
-      objectList.push(MicroDataObject.new(node,self))
+      objectList.push(MicroDataObject.new(node, self))
       return objectList
     end
     for child in node.children() do
@@ -31,4 +31,10 @@ class MicroDataDocument
     end
     return objectList
   end
+
+  def get_Links()
+    fakeObject = MicroDataObject.new(@html_doc.root(), self)
+    return fakeObject.get_Links()
+  end
+
 end
