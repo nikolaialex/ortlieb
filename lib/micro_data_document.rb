@@ -5,14 +5,16 @@ require 'nokogiri/xml/node'
 require 'micro_data_object'
 
 
-
 class MicroDataDocument
 
   attr_accessor :url, :html_doc
 
+
   def initialize(url)
     @url = url
-    @html_doc = Nokogiri::HTML(open(url))
+    if url != "no"
+      @html_doc = Nokogiri::HTML(open(url))
+    end
   end
 
   def get_top_level_objects()
@@ -35,6 +37,11 @@ class MicroDataDocument
   def get_Links()
     fakeObject = MicroDataObject.new(@html_doc.root(), self)
     return fakeObject.get_Links()
+  end
+
+  def get_Forms()
+    fakeObject = MicroDataObject.new(@html_doc.root(),self)
+    return fakeObject.get_Forms()
   end
 
 end

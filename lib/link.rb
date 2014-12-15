@@ -3,6 +3,7 @@ require 'hypermedia_parser'
 require 'micro_data_document'
 require 'micro_data_object'
 require 'nokogiri/html/document'
+require 'uri'
 
 
 class Link
@@ -13,10 +14,21 @@ class Link
   end
 
   def get_Url()
-    #toDo "href" = "/..."
-    return @root.attr("href")
+
+    href = @root.attr("href")
+
+    return URI.join(@parent.url, href)
   end
 
+
+  def follow()
+    href = get_Url()
+    return HypermediaParser.enter(href)
+  end
+
+  def to_s
+    "<link @>" + @root.attr("href")
+  end
 
   #def follow(self):
   #    href = self._elt.attrib['href']
@@ -32,7 +44,5 @@ class Link
   #    remote_doc = enter(resolved_base)
   #return _value_of(remote_doc, up.fragment)
 
-  def follow()
 
-  end
 end
