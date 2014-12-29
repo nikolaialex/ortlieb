@@ -1,0 +1,46 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Orders</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <ul itemscope itemtype ="http://schema.org/Order">
+            <li><time itemprop="orderDate" datetime="2014-12-04">04.12.2014</time></li>
+            <li><time itemprop="paymentDue" datetime="2014-12-12">12.12.2014</time></li>
+            <li><a itemprop="orderStatus" href="http://schema.org/OrderStatus/OrderProcessing">OrderProcessing</a></li>
+            <li><ul itemprop="orderedItem" itemscope itemtype="http://schema.org/Car">
+                <li><span itemprop ="brand">VW</span></li>
+                <li><span itemprop="color">Black</span></li>
+                <li><span itemprop="model">Golf</span></li>
+                <li><ul itemprop="offers" itemscope itemtype ="http://schema.org/Offer">
+                    <li><span itemprop="price">50€ pro Tag</span></li>
+                    <li><time itemprop="availibilityStarts" datetime="2014-12-04">04.12.2014</time></li>
+                    <li><a itemprop="availability" href="http://schema.org/InStock">In stock</a></li>
+                    <li itemprop="availableAtOrFrom" itemscope itemtype="http://schema.org/Place">
+                            <ul itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                <li><span itemprop="postalCode">38440</span></li>
+                                <li><span itemprop="streetAddress">Laagbergstraße 62</span></li>
+                            </ul>
+                    </li>
+                    </ul>
+                </li>
+                </ul>
+            </li>
+            <li><ul itemprop="customer" itemscope itemtype="http://schema.org/Person">
+                    <li><span itemprop="givenName">Max</span></li>
+                    <li><span itemprop="familyName">Mustermann</span></li>
+                </ul>
+            </li>     
+        </ul>
+        <form data-rel="cancelOrder" action="http://www.autovermietung.de/Orders" method="POST">
+            <input type="text" name="model"/>
+            <input type="text" name="familyName"/>
+            <input type="submit" value="Cancel Order"/>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Alle Autos</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <a rel="self" href="self"> self</a>
+        
+       <ul itemscope itemtype ="http://schema.org/Car">
+            <li><span itemprop ="brand">VW</span></li>
+            <li><span itemprop="color">Black</span></li>
+            <li><span itemprop="model">Golf</span></li>
+
+        </ul>
+        
+        <ul itemscope itemtype ="http://schema.org/Car">
+            <li><span itemprop ="brand">Opel</span></li>
+            <li><span itemprop="color">White</span></li>
+            <li><span itemprop="model">Astra</span></li>
+            <li><ul itemprop="offers" itemscope itemtype ="http://schema.org/Offer">
+                    <li><span itemprop="price">40€ pro Tag</span></li>
+                    <li><time itemprop="availibilityStarts" datetime="2014-12-07">07.12.2014</time></li>
+                    <li><a itemprop="availability" href="http://schema.org/OutOfStock">In stock</a></li>
+                    <li itemprop="availableAtOrFrom" itemscope itemtype="http://schema.org/Place">
+                            <ul itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                <li><span itemprop="postalCode">30167</span></li>
+                                <li><span itemprop="streetAddress">Auf dem Loh 2</span></li>
+                            </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        
+    </body>
+</html>

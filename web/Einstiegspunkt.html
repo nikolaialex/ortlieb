@@ -1,0 +1,29 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Autovermietung</title>
+    </head>
+    <body>
+        <a rel="allCars" href="cars">alle Autos</a>
+        <a rel="makeOrderView" href="makeOrder">Bestellen</a>
+        <a rel="availableCars" href="http://www.autovermietung.de/cars/?status=available"></a>
+    
+        <form method="get" action="http://www.autovermietung.de/cars/">
+            <input type="text" name="car"/>
+            <input type="submit" value="Suchen"/>
+        </form>
+         
+        <a rel="accteptedOffers" href="http://www.autovermietung.de/offers/?status=accepted">alle Ausleihen ansehen</a>
+        <a rel="allOrders" href="orders">alle Bestellungen</a>
+        
+        <form method="get" action="http://www.autovermietung.de/orders/">
+            <input type="text" name="customer"/>
+            <input type="submit" value="anzeigen"/>
+        </form>
+    </body>
+</html>
